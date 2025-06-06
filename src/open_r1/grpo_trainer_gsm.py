@@ -54,7 +54,7 @@ from trl.models import create_reference_model, prepare_deepspeed, unwrap_model_f
 from trl.trainer.callbacks import SyncRefModelCallback
 from trl.trainer.grpo_config import GRPOConfig
 from trl.trainer.utils import generate_model_card, get_comet_experiment_url, pad, selective_log_softmax
-from open_r1.rewards_gsm import extract_answer_from_model_output, extract_answer_from_dataset, extract_last_number, extract_single_number
+# from open_r1.rewards_gsm import extract_answer_from_model_output, extract_answer_from_dataset, extract_last_number, extract_single_number
 
 from tqdm import tqdm
 
@@ -1282,7 +1282,7 @@ class GRPOTrainer(Trainer):
             super().log(logs)
         self._metrics[mode].clear()
         
-    def _maybe_log_save_evaluate(self, tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval, start_time):
+    def _maybe_log_save_evaluate(self, tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval, start_time, learning_rate= None):
         if self.accelerator.is_main_process:
             eval_start_time= time.perf_counter()
 
